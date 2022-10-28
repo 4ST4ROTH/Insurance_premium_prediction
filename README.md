@@ -1,5 +1,7 @@
 #Insurance Price Prediction
 
+Application URL: https://premium-price-prediction.herokuapp.com/
+
 Requirements:
 1) Github account
 2) Heroku account (or any other cloud service platform)
