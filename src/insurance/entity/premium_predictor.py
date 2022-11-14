@@ -14,7 +14,7 @@ class PremiumData:
                  children : int,
                  smoker : str,
                  region : str,
-                 expenses : float
+                 expenses : float = None
                  ):
 
         try:
@@ -48,7 +48,7 @@ class PremiumData:
                 "children": [self.children],
                 "smoker": [self.smoker],
                 "region": [self.region],
-                "expenses": [self.expenses],
+                
                 }
 
             return input_data

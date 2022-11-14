@@ -1,21 +1,22 @@
-from flask import Flask, request
-from src.insurance.utils.utils import read_yaml_file, write_yaml_file
-from matplotlib.style import context
-from src.logger import logging
-from src.exception import PremiumException
-import os, sys
 import json
+import os
+import sys
+
+from flask import Flask, abort, render_template, request, send_file
+from matplotlib.style import context
+
+from src.exception import PremiumException
 from src.insurance.config.configuration import Configuration
 from src.insurance.constant import CONFIG_DIR, get_current_time_stamp
+from src.insurance.entity.premium_predictor import (PremiumData,
+                                                    PremiumPredictor)
 from src.insurance.pipeline.pipeline import Pipeline
-from src.insurance.entity.premium_predictor import PremiumPredictor, PremiumData
-from src.logger import get_log_dataframe
-from flask import send_file, abort, render_template
-
+from src.insurance.utils.utils import read_yaml_file, write_yaml_file
+from src.logger import get_log_dataframe, logging
 
 ROOT_DIR = os.getcwd()
 LOG_FOLDER_NAME = "logs"
-PIPELINE_FOLDER_NAME = "premium"
+PIPELINE_FOLDER_NAME = "src/insurance"
 SAVED_MODELS_DIR_NAME = "saved_models"
 MODEL_CONFIG_FILE_PATH = os.path.join(ROOT_DIR, CONFIG_DIR, "model.yaml")
 LOG_DIR = os.path.join(ROOT_DIR, LOG_FOLDER_NAME)
@@ -105,11 +106,11 @@ def predict():
 
     if request.method == 'POST':
         age = float(request.form['age'])
-        sex = float(request.form['sex'])
+        sex = request.form['sex']
         bmi = float(request.form['bmi'])
         children = float(request.form['children'])
-        smoker = float(request.form['smoker'])
-        region = float(request.form['region'])
+        smoker = request.form['smoker']
+        region = request.form['region']
         
         premium_data = PremiumData(age=age,
                                    sex=sex,
@@ -118,7 +119,7 @@ def predict():
                                    smoker=smoker,
                                    region=region
                                    
-                                   )
+                                   )  # type: ignore
 
         premium_df = premium_data.get_premium_input_data_frame()
         premium_predictor = PremiumPredictor(model_dir=MODEL_DIR)
