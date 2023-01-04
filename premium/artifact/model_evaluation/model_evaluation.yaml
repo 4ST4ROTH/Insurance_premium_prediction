@@ -1,0 +1,9 @@
+best_model:
+  model_path: C:\Users\singh\ML_Project\Insurance_premium_prediction\premium\artifact\model_trainer\2022-11-08-14-01-49\trained_model\model.pkl
+history:
+  2022-11-08-12-06-45:
+    model_path: C:\Users\singh\ML_Project\Insurance_premium_prediction\premium\artifact\model_trainer\2022-10-26-16-01-01\trained_model\model.pkl
+  2022-11-08-13-16-24:
+    model_path: C:\Users\singh\ML_Project\Insurance_premium_prediction\premium\artifact\model_trainer\2022-11-08-12-06-45\trained_model\model.pkl
+  2022-11-08-14-01-49:
+    model_path: C:\Users\singh\ML_Project\Insurance_premium_prediction\premium\artifact\model_trainer\2022-11-08-13-16-24\trained_model\model.pkl
